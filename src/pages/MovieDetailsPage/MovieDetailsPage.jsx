@@ -32,8 +32,7 @@ export default function MovieDetailsPage() {
       <Link to={backLink} className={styles.backButton}>Go Back</Link>
       
       <div className={styles.movieDetails}>
-        {/* Додаємо зображення */}
-        <img src={posterUrl} alt={movie.title} className={styles.poster} />
+    <img src={posterUrl} alt={movie.title} className={styles.poster} />
         
         <div className={styles.info}>
           <h1>{movie.title}</h1>
