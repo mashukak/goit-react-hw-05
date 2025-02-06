@@ -1,0 +1,18 @@
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; 
+    margin-top: 20px; 
+  }
+  
+  .links a {
+    text-decoration: none;
+    color: #ea2bf4;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+  }
+  

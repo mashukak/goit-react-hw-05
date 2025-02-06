@@ -6,12 +6,37 @@ import styles from './MovieReviews.module.css';
 export default function MovieReviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchMovieReviews(movieId).then((data) => setReviews(data.results));
+    let isMounted = true; // Захист від оновлення стану після демонтажу компонента
+    setLoading(true);
+    setError(null);
+
+    fetchMovieReviews(movieId)
+      .then((data) => {
+        if (isMounted) {
+          setReviews(data.results || []);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching reviews:', error);
+        if (isMounted) {
+          setError('Failed to load reviews.');
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [movieId]);
 
-  if (reviews.length === 0) return <p>No reviews available.</p>;
+  if (loading) return <p>Loading reviews...</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
+  if (!reviews || reviews.length === 0) return <p>No reviews available.</p>;
 
   return (
     <ul className={styles.list}>
