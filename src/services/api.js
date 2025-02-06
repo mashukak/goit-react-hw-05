@@ -12,7 +12,7 @@ const options = {
   },
 };
 
-// Fetch trending movies
+
 export const fetchTrendingMovies = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/trending/movie/day`, options);
@@ -23,7 +23,7 @@ export const fetchTrendingMovies = async () => {
   }
 };
 
-// Search for movies by keyword
+
 export const searchMovies = async (query) => {
   try {
     const response = await axios.get(
@@ -37,7 +37,7 @@ export const searchMovies = async (query) => {
   }
 };
 
-// Fetch movie details
+
 export const fetchMovieDetails = async (movieId) => {
   try {
     const response = await axios.get(`${BASE_URL}/movie/${movieId}`, options);
@@ -48,7 +48,7 @@ export const fetchMovieDetails = async (movieId) => {
   }
 };
 
-// Fetch movie cast
+
 export const fetchMovieCast = async (movieId) => {
   try {
     const response = await axios.get(
@@ -62,7 +62,7 @@ export const fetchMovieCast = async (movieId) => {
   }
 };
 
-// Fetch movie reviews
+
 export const fetchMovieReviews = async (movieId) => {
   try {
     const response = await axios.get(

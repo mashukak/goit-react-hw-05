@@ -10,7 +10,7 @@ export default function MovieReviews() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // Захист від оновлення стану після демонтажу компонента
+    let isMounted = true; 
     setLoading(true);
     setError(null);
 

@@ -13,7 +13,7 @@ export default function MovieDetailsPage() {
   useEffect(() => {
     fetchMovieDetails(movieId)
       .then((data) => {
-        console.log('Movie data:', data); // Перевіряємо в консолі, що приходить
+        console.log('Movie data:', data); 
         setMovie(data);
       })
       .catch((error) => console.error('Error fetching movie details:', error));
@@ -21,11 +21,11 @@ export default function MovieDetailsPage() {
 
   if (!movie) return <div>Loading...</div>;
 
-  // Формуємо повний шлях до плаката
+
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
   const posterUrl = movie.poster_path
     ? `${BASE_IMG_URL}${movie.poster_path}`
-    : 'https://via.placeholder.com/500x750?text=No+Image'; // Запасне зображення
+    : 'https://via.placeholder.com/500x750?text=No+Image'; 
 
   return (
     <div className={styles.container}>
