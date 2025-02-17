@@ -1,23 +1,36 @@
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import MovieList from '../../components/MovieList/MovieList';
-import { searchMovies } from '../../services/api';
-import styles from './MoviesPage.module.css';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import MovieList from "../../components/MovieList/MovieList";
+import { searchMovies } from "../../services/api";
+import styles from "./MoviesPage.module.css";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get("query") || "";
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    if (!query) return;
+
+    const fetchMovies = async () => {
+      try {
+        const results = await searchMovies(query);
+        setMovies(results);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, [query]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const searchValue = e.target.elements.query.value.trim();
 
-    if (!searchValue) return;
+    if (!searchValue || searchValue === query) return;
 
     setSearchParams({ query: searchValue });
-    const results = await searchMovies(searchValue);
-    setMovies(results);
   };
 
   return (
